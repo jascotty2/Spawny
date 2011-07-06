@@ -75,6 +75,8 @@ public class SetSpawnCommand implements CommandExecutor {
                     (int) player.getLocation().getY(),
                     (int) player.getLocation().getZ());
             
+            player.sendMessage(ChatColor.GREEN + "You set the world's spawn point");
+            
             return true;
 
         } catch (Exception e) {
