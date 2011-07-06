@@ -55,7 +55,7 @@ public class SetSpawnCommand implements CommandExecutor {
             Player player = (Player) cs;
 
             //Check to see if the player can set the spawn
-            if (SpawnyPlugin.getInstance().getPermissionsHandler() != null && !(SpawnyPlugin.getInstance().getPermissionsHandler().has(player, "spany.set"))) {
+            if (SpawnyPlugin.getInstance().getPermissionsHandler() != null && !(SpawnyPlugin.getInstance().getPermissionsHandler().has(player, "spawny.set"))) {
                 //Nope. Notify
                 cs.sendMessage(ChatColor.RED + "You do not have permission to set the spawn!");
                 //And return
