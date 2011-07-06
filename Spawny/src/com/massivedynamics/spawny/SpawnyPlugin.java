@@ -17,6 +17,7 @@
 package com.massivedynamics.spawny;
 
 import com.nijiko.permissions.PermissionHandler;
+import java.util.logging.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -53,15 +54,38 @@ public class SpawnyPlugin extends JavaPlugin {
         }
         return instance;
     }
+    
+    /**
+     * The logger for this class
+     */
+    private Logger logger = Logger.getLogger("SpawnyPlugin");
 
-    @Override
-    public void onDisable() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    /**
+     * Gets the logger
+     * @return The logger
+     */
+    public Logger getLogger() {
+        return logger;
     }
 
+    /**
+     * Called when disabling Spawny
+     */
+    @Override
+    public void onDisable() {
+        logger.info("Stopping Spawny version " + this.getDescription().getVersion());
+    }
+
+    /**
+     * Called when enabling Spawny
+     */
     @Override
     public void onEnable() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (instance == null) {
+            instance = this;
+        }
+
+        logger.info("Starting Warpy version " + this.getDescription().getVersion());
     }
     
 }
