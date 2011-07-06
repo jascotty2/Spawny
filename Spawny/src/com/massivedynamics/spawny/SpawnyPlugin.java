@@ -16,6 +16,8 @@
  */
 package com.massivedynamics.spawny;
 
+import com.massivedynamics.spawny.commands.SetSpawnCommand;
+import com.massivedynamics.spawny.commands.SpawnCommand;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 import java.util.logging.Logger;
@@ -88,6 +90,9 @@ public class SpawnyPlugin extends JavaPlugin {
         }
 
         logger.info("Starting Spawny version " + this.getDescription().getVersion());
+        
+        this.getCommand("spawn").setExecutor(new SpawnCommand());
+        this.getCommand("setspawn").setExecutor(new SetSpawnCommand());
         
         setupPermissions();
     }
