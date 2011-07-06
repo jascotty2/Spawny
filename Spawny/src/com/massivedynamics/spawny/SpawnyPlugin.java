@@ -17,7 +17,9 @@
 package com.massivedynamics.spawny;
 
 import com.nijiko.permissions.PermissionHandler;
+import com.nijikokun.bukkit.Permissions.Permissions;
 import java.util.logging.Logger;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -85,7 +87,27 @@ public class SpawnyPlugin extends JavaPlugin {
             instance = this;
         }
 
-        logger.info("Starting Warpy version " + this.getDescription().getVersion());
+        logger.info("Starting Spawny version " + this.getDescription().getVersion());
+        
+        setupPermissions();
+    }
+    
+    /**
+     * Sets up permissions
+     */
+    private void setupPermissions() {
+        if (permissionHandler != null) {
+            return;
+        }
+
+        Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");
+
+        if (permissionsPlugin == null) {
+            logger.warning("Permission system not detected, defaulting to OP");
+            return;
+        }
+
+        permissionHandler = ((Permissions) permissionsPlugin).getHandler();
     }
     
 }
