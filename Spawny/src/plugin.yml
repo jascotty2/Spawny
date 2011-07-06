@@ -1,0 +1,17 @@
+name: Spawny
+description: An enhancement to the spawn system, allowing changing of spawns and teleporting to the spawn points
+main: com.massivedynamics.spawny.SpawnyPlugin
+version: 0.9.0.0
+database: false
+author: CruzBishop
+commands:
+  setspawn:
+    description: Sets the spawn point for the current world
+    aliases: [sspawn, spawnset, changespawn, movespawn]
+    permission: apawny.set
+    usage: "Syntax error! Usage is /setspawn"
+  spawn:
+    description: Teleports to the spawn point for the current world
+    aliases: [dospawn, executespawn]
+    permission: spawny.spawn
+    usage: "Syntax error! Usage is /spawn"
