@@ -1,20 +1,30 @@
+#The name of this plugin, which is Spawny
 name: Spawny
+#Make up some crap for the description :P
 description: An enhancement to the spawn system, allowing changing of spawns and teleporting to the spawn points
+#Define the main class
 main: com.massivedynamics.spawny.SpawnyPlugin
+#Define the version
 version: 1.1.0.0 PREVIEW
+#No database used! Yay!
 database: false
+#Of course I'm the author
 author: CruzBishop
+#K, command time
 commands:
+  #Lets you set the spawn
   setspawn:
     description: Sets the spawn point for the current world
     aliases: [sspawn, spawnset, changespawn, movespawn]
     permission: spawny.set
     usage: "Syntax error! Usage is /setspawn"
+  #Takes you to the spawn point
   spawn:
     description: Teleports to the spawn point for the current world
     aliases: [dospawn, executespawn]
     permission: spawny.spawn
     usage: "Syntax error! Usage is /spawn"
+#That was fun. Now for permissions!
 permissions:
   spawny.*:
     description: Gives access to /spawn and /setspawn
