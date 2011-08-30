@@ -23,7 +23,7 @@ commands:
     description: Teleports to the spawn point for the current world
     aliases: [dospawn, executespawn]
     permission: spawny.spawn
-    usage: "Syntax error! Usage is /spawn"
+    usage: "Syntax error! Usage is /spawn <worldName>"
 #That was fun. Now for permissions!
 permissions:
   spawny.*:

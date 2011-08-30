@@ -18,6 +18,7 @@ package com.massivedynamics.spawny.commands;
 
 import com.massivedynamics.spawny.SpawnyPlugin;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,7 +27,7 @@ import org.bukkit.entity.Player;
 /**
  * The spawn command
  * @author Cruz Bishop
- * @version 1.1.0.0
+ * @version 1.1.1.0
  */
 public class SpawnCommand implements CommandExecutor {
 
@@ -40,9 +41,9 @@ public class SpawnCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender cs, Command cmnd, String label, String[] arguments) {
-        
+
         try {
-            
+
             //Is it not a player?
             if (!(cs instanceof Player)) {
                 //Damn. Letting you know
@@ -61,15 +62,31 @@ public class SpawnCommand implements CommandExecutor {
                 //And return
                 return true;
             }
-            
+
+            //Get the player's world
+            World world = player.getWorld();
+
+            //See if the world's name is included
+            if (arguments.length > 0) {
+                //Get the world
+                world = player.getServer().getWorld(arguments[0]);
+                //See if the world exists
+                if (world == null) {
+                    //Nope. Notify
+                    cs.sendMessage(ChatColor.RED + "The world \"" + arguments[0] + "\" does not exist!");
+                    //And return
+                    return true;
+                }
+            }
+
             //Teleport
-            player.teleport(player.getWorld().getSpawnLocation());
-            
+            player.teleport(world.getSpawnLocation());
+
             //And notify
             player.sendMessage(ChatColor.GREEN + "You returned to the spawn point");
-            
+
             return true;
-            
+
         } catch (Exception e) {
             //Oh shit, something went wrong!
             //Letting the console know
@@ -78,7 +95,6 @@ public class SpawnCommand implements CommandExecutor {
             cs.sendMessage("Oh, something went wrong while spawning. Please try again later!");
             return true;
         }
-        
+
     }
-    
 }
