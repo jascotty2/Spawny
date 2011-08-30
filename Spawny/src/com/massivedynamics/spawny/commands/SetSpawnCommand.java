@@ -71,9 +71,9 @@ public class SetSpawnCommand implements CommandExecutor {
             }
             
             //Set the spawn location
-            player.getWorld().setSpawnLocation((int) player.getLocation().getX(),
-                    (int) player.getLocation().getY(),
-                    (int) player.getLocation().getZ());
+            player.getWorld().setSpawnLocation((int) Math.floor(player.getLocation().getX()),
+                    (int) Math.floor(player.getLocation().getY()),
+                    (int) Math.floor(player.getLocation().getZ()));
             
             player.sendMessage(ChatColor.GREEN + "You set the world's spawn point");
             
