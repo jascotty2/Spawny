@@ -55,7 +55,7 @@ public class SpawnCommand implements CommandExecutor {
             Player player = (Player) cs;
 
             //Check to see if the player can spawn
-            if (player.hasPermission("spawny.spawn")) {
+            if (!player.hasPermission("spawny.spawn")) {
                 //Nope. Notify
                 cs.sendMessage(ChatColor.RED + "You do not have permission to spawn!");
                 //And return
