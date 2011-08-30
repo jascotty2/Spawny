@@ -26,7 +26,7 @@ import org.bukkit.entity.Player;
 /**
  * A command for adding spawns
  * @author Cruz Bishop
- * @version 1.0.0.0
+ * @version 1.1.0.0
  */
 public class SetSpawnCommand implements CommandExecutor {
 
@@ -55,7 +55,7 @@ public class SetSpawnCommand implements CommandExecutor {
             Player player = (Player) cs;
 
             //Check to see if the player can set the spawn
-            if (SpawnyPlugin.getInstance().getPermissionsHandler() != null && !(SpawnyPlugin.getInstance().getPermissionsHandler().has(player, "spawny.set"))) {
+            if (player.hasPermission("spawny.setspawn")) {
                 //Nope. Notify
                 cs.sendMessage(ChatColor.RED + "You do not have permission to set the spawn!");
                 //And return

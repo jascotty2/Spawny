@@ -26,7 +26,7 @@ import org.bukkit.entity.Player;
 /**
  * The spawn command
  * @author Cruz Bishop
- * @version 1.0.0.0
+ * @version 1.1.0.0
  */
 public class SpawnCommand implements CommandExecutor {
 
@@ -55,7 +55,7 @@ public class SpawnCommand implements CommandExecutor {
             Player player = (Player) cs;
 
             //Check to see if the player can spawn
-            if (SpawnyPlugin.getInstance().getPermissionsHandler() != null && !(SpawnyPlugin.getInstance().getPermissionsHandler().has(player, "spawny.spawn"))) {
+            if (player.hasPermission("spawny.spawn")) {
                 //Nope. Notify
                 cs.sendMessage(ChatColor.RED + "You do not have permission to spawn!");
                 //And return
