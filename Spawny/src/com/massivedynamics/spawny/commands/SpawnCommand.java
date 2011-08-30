@@ -83,7 +83,7 @@ public class SpawnCommand implements CommandExecutor {
             player.teleport(world.getSpawnLocation());
 
             //And notify
-            player.sendMessage(ChatColor.GREEN + "You returned to the spawn point");
+            player.sendMessage(ChatColor.GREEN + "You returned to \"" + world.getName() + "\"'s spawn point");
 
             return true;
 
