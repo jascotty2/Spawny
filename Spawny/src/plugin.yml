@@ -15,3 +15,15 @@ commands:
     aliases: [dospawn, executespawn]
     permission: spawny.spawn
     usage: "Syntax error! Usage is /spawn"
+permissions:
+  spawny.*:
+    description: Gives access to /spawn and /setspawn
+    children:
+      spawny.spawn: true
+      spawny.setspawn: true
+  spawny.spawn:
+    description: Gives access to the /spawn command
+    default: true
+  spawny.setspawn:
+    description: Gives access to the /setspawn command
+    default: op
