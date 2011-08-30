@@ -5,7 +5,7 @@ description: An enhancement to the spawn system, allowing changing of spawns and
 #Define the main class
 main: com.massivedynamics.spawny.SpawnyPlugin
 #Define the version
-version: 1.1.0.0 PREVIEW
+version: 1.1.0.0
 #No database used! Yay!
 database: false
 #Of course I'm the author
