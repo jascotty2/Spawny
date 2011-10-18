@@ -16,7 +16,7 @@ commands:
   setspawn:
     description: Sets the spawn point for the current world
     aliases: [sspawn, spawnset, changespawn, movespawn]
-    permission: spawny.set
+    permission: spawny.setspawn
     usage: "Syntax error! Usage is /setspawn"
   #Takes you to the spawn point
   spawn:
