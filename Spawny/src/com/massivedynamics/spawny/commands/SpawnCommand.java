@@ -77,6 +77,16 @@ public class SpawnCommand implements CommandExecutor {
                     //And return
                     return true;
                 }
+            } else {
+                //Check for bed spawn
+                if (player.getBedSpawnLocation() != null) {
+                    //And teleport
+                    player.teleport(player.getBedSpawnLocation());
+                    //Then notify
+                    player.sendMessage(ChatColor.GREEN + "You returned to bed");
+                    //Then return
+                    return true;
+                }
             }
 
             //Teleport
