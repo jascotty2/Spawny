@@ -30,6 +30,12 @@ import org.bukkit.entity.Player;
  */
 public class SetSpawnCommand implements CommandExecutor {
 
+	final SpawnyPlugin plugin;
+	
+	public SetSpawnCommand(SpawnyPlugin plugin) {
+		this.plugin = plugin;
+	}
+	
     /**
      * Called when the command is executed
      * @param cs The command sender
@@ -74,6 +80,8 @@ public class SetSpawnCommand implements CommandExecutor {
             player.getWorld().setSpawnLocation((int) Math.floor(player.getLocation().getX()),
                     (int) Math.floor(player.getLocation().getY()),
                     (int) Math.floor(player.getLocation().getZ()));
+			
+			plugin.getOrientations().setDirection(player.getWorld().getName(), player.getLocation().getYaw());
             
             player.sendMessage(ChatColor.GREEN + "You set the world's spawn point");
             
@@ -82,7 +90,7 @@ public class SetSpawnCommand implements CommandExecutor {
         } catch (Exception e) {
             //Oh shit, something went wrong!
             //Letting the console know
-            SpawnyPlugin.getInstance().getLogger().severe("Could not set the spawn point - " + e.getMessage() + " in " + e.getCause());
+            plugin.getLogger().severe("Could not set the spawn point - " + e.getMessage() + " in " + e.getCause());
             //Letting the player know
             cs.sendMessage("Oh, something went wrong while adding the spawn point. Please try again later!");
             return true;

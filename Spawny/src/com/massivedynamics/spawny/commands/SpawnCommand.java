@@ -31,6 +31,12 @@ import org.bukkit.entity.Player;
  */
 public class SpawnCommand implements CommandExecutor {
 
+	final SpawnyPlugin plugin;
+	
+	public SpawnCommand(SpawnyPlugin plugin) {
+		this.plugin = plugin;
+	}
+	
     /**
      * Called when the command is executed
      * @param cs The command sender
@@ -90,8 +96,8 @@ public class SpawnCommand implements CommandExecutor {
             }
 
             //Teleport
-            player.teleport(world.getSpawnLocation());
-
+			SpawnyPlugin.spawn(player, world);
+			
             //And notify
             player.sendMessage(ChatColor.GREEN + "You returned to \"" + world.getName() + "\"'s spawn point");
 
@@ -100,7 +106,7 @@ public class SpawnCommand implements CommandExecutor {
         } catch (Exception e) {
             //Oh shit, something went wrong!
             //Letting the console know
-            SpawnyPlugin.getInstance().getLogger().severe("Could not spawn  - " + e.getMessage() + " in " + e.getCause());
+            plugin.getLogger().severe("Could not spawn  - " + e.getMessage() + " in " + e.getCause());
             //Letting the player know
             cs.sendMessage("Oh, something went wrong while spawning. Please try again later!");
             return true;
