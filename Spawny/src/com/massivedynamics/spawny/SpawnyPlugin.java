@@ -83,7 +83,7 @@ public class SpawnyPlugin extends JavaPlugin {
         
 		
 		PluginCommand pc = this.getServer().getPluginCommand("spawn");
-		if(pc.isRegistered()) {
+		if(pc != null && pc.isRegistered()) {
 			logger.info("\"/spawn\" is already registered to " + pc.getPlugin().toString() + " (overriding commmand)");
 			pc.setExecutor(new SpawnCommand(this));
 		}
@@ -91,7 +91,7 @@ public class SpawnyPlugin extends JavaPlugin {
         this.getCommand("spawn").setExecutor(new SpawnCommand(this));
 		
 		pc = this.getServer().getPluginCommand("setspawn");
-		if(pc.isRegistered()) {
+		if(pc != null && pc.isRegistered()) {
 			logger.info("\"/setspawn\" is already registered to " + pc.getPlugin().toString() + " (overriding commmand)");
 			pc.setExecutor(new SetSpawnCommand(this));
 		}
