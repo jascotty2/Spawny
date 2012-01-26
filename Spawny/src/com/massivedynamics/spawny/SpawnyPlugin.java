@@ -18,7 +18,7 @@ package com.massivedynamics.spawny;
 
 import com.massivedynamics.spawny.commands.SetSpawnCommand;
 import com.massivedynamics.spawny.commands.SpawnCommand;
-import java.util.logging.Level;
+import java.util.Map;
 import java.util.logging.Logger;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -35,20 +35,18 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @version 1.1.0.0
  */
 public class SpawnyPlugin extends JavaPlugin {
-    
+
     /**
      * The instance of this class
      */
     private static SpawnyPlugin instance;
-
     /**
      * The logger for this class
      */
     private Logger logger = Logger.getLogger("SpawnyPlugin");
+    protected SpawnOrientation orientations;
+    protected PlayerSpawner playerListener;
 
-	protected SpawnOrientation orientations;
-	protected PlayerSpawner playerListener;
-	
     /**
      * Gets the logger
      * @return The logger
@@ -56,8 +54,10 @@ public class SpawnyPlugin extends JavaPlugin {
     public Logger getLogger() {
         return logger;
     }
-	
-	public SpawnOrientation getOrientations() { return orientations; }
+
+    public SpawnOrientation getOrientations() {
+        return orientations;
+    }
 
     /**
      * Called when disabling Spawny
@@ -75,47 +75,54 @@ public class SpawnyPlugin extends JavaPlugin {
         if (instance == null) {
             instance = this;
         }
-		
-		orientations = new SpawnOrientation(this);
-		playerListener = new PlayerSpawner(this);
+
+        orientations = new SpawnOrientation(this);
+        playerListener = new PlayerSpawner(this);
 
         logger.info("Starting Spawny version " + this.getDescription().getVersion());
         
-		
-		PluginCommand pc = this.getServer().getPluginCommand("spawn");
-		if(pc != null && pc.isRegistered()) {
-			logger.info("\"/spawn\" is already registered to " + pc.getPlugin().toString() + " (overriding commmand)");
-			pc.setExecutor(new SpawnCommand(this));
-		}
-		
-        this.getCommand("spawn").setExecutor(new SpawnCommand(this));
-		
-		pc = this.getServer().getPluginCommand("setspawn");
-		if(pc != null && pc.isRegistered()) {
-			logger.info("\"/setspawn\" is already registered to " + pc.getPlugin().toString() + " (overriding commmand)");
-			pc.setExecutor(new SetSpawnCommand(this));
-		}
-        this.getCommand("setspawn").setExecutor(new SetSpawnCommand(this));
+        if (this.getCommand("spawn") != null) {
+            this.getCommand("spawn").setExecutor(new SpawnCommand(this));
+        }
+        if (this.getCommand("spawn") != null) {
+            this.getCommand("spawn").setExecutor(new SpawnCommand(this));
+        }
 
-		PluginManager pm = this.getServer().getPluginManager();
-		pm.registerEvent(Type.PLAYER_RESPAWN, playerListener, Priority.Low, this);
-		pm.registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Low, this);
-		
+        /*    // bukkit 1200 returns null if already registered
+        PluginCommand pc = this.getServer().getPluginCommand("spawn");
+        if(pc != null && pc.isRegistered() && pc.getPlugin() != this) {
+        logger.info("\"/spawn\" is already registered to " + pc.getPlugin().toString() + " (overriding commmand)");
+        pc.setExecutor(new SpawnCommand(this));
+        }
+        this.getCommand("spawn").setExecutor(new SpawnCommand(this));
+        
+        pc = this.getServer().getPluginCommand("setspawn");
+        if(pc != null && pc.isRegistered() && pc.getPlugin() != this) {
+        logger.info("\"/setspawn\" is already registered to " + pc.getPlugin().toString() + " (overriding commmand)");
+        pc.setExecutor(new SetSpawnCommand(this));
+        }
+        this.getCommand("setspawn").setExecutor(new SetSpawnCommand(this));
+         */
+
+        PluginManager pm = this.getServer().getPluginManager();
+        pm.registerEvent(Type.PLAYER_RESPAWN, playerListener, Priority.Low, this);
+        pm.registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Low, this);
+
     }
-	
-	public static void spawn(Player p) {
-		if(p != null) {
-			Location l = p.getWorld().getSpawnLocation();
-			l.setYaw(instance.orientations.getDirection(p.getWorld().getName()));
-			p.teleport(l);
-		}
-	}
-	
-	public static void spawn(Player p, World w) {
-		if(p != null) {
-			Location l = w.getSpawnLocation();
-			l.setYaw(instance.orientations.getDirection(p.getWorld().getName()));
-			p.teleport(l);
-		}
-	}
+
+    public static void spawn(Player p) {
+        if (p != null) {
+            Location l = p.getWorld().getSpawnLocation();
+            l.setYaw(instance.orientations.getDirection(p.getWorld().getName()));
+            p.teleport(l);
+        }
+    }
+
+    public static void spawn(Player p, World w) {
+        if (p != null) {
+            Location l = w.getSpawnLocation();
+            l.setYaw(instance.orientations.getDirection(p.getWorld().getName()));
+            p.teleport(l);
+        }
+    }
 }

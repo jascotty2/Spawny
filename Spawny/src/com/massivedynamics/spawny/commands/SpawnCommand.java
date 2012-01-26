@@ -47,7 +47,7 @@ public class SpawnCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender cs, Command cmnd, String label, String[] arguments) {
-
+        
         try {
 
             //Is it not a player?
